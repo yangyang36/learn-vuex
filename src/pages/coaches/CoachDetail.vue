@@ -56,7 +56,6 @@ export default {
     this.selectedCoach = this.$store.getters['coachesModule/coaches'].find(
       (coach) => coach.id === this.id
     );
-    console.log(this.selectedCoach);
   },
 };
 </script>
