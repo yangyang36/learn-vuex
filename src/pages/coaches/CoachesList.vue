@@ -4,7 +4,9 @@
     <base-card>
       <div class="controls">
         <base-button mode="outline">Refresh</base-button>
-        <base-button to="/register" link>Register as Coach</base-button>
+        <base-button to="/register" link v-if="!isCoach"
+          >Register as Coach</base-button
+        >
       </div>
       <ul v-if="hasCoaches">
         <coach-item
@@ -37,6 +39,9 @@ export default {
   },
   components: { CoachItem, BaseCard, CoachFilter },
   computed: {
+    isCoach() {
+      return this.$store.getters['coachesModule/isCoach'];
+    },
     filteredCoaches() {
       const coaches = this.$store.getters['coachesModule/coaches'];
       return coaches.filter((coach) => {
