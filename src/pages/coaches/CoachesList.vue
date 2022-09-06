@@ -10,7 +10,11 @@
           <base-button mode="outline" @click="loadCoaches(true)"
             >Refresh</base-button
           >
-          <base-button to="/register" link v-if="!isCoach && !isLoading"
+          <base-button link to="/auth" v-if="!isLoggedIn">Login</base-button>
+          <base-button
+            to="/register"
+            link
+            v-if="isLoggedIn && !isCoach && !isLoading"
             >Register as Coach</base-button
           >
         </div>
@@ -51,6 +55,9 @@ export default {
   },
   components: { CoachItem, BaseCard, CoachFilter },
   computed: {
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
+    },
     isCoach() {
       return this.$store.getters['coachesModule/isCoach'];
     },
